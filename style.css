@@ -1,5 +1,5 @@
 body {
-  background-color: #f8f9fa;
+  background: linear-gradient(to bottom, #ffffff, #49d5ff46);
   display: flex;
   height: 100vh; /* Ensure the body covers the entire viewport height */
   margin: 0; /* Remove default margin */
@@ -15,6 +15,12 @@ body {
   margin-top: 10px;
   margin-bottom: 10px;
   border-radius: 10px;
+}
+#name{
+  font-family: "MonteCarlo", cursive;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 40px;
 }
 .profile-picture{
   display: flex;
@@ -77,6 +83,9 @@ body {
 
 #photos, #tributes, .profile-title {
   text-align: center;
+}
+#life, #ode {
+  
 }
 #ode p, #life p {
   text-align: justify;
