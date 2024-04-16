@@ -86,9 +86,12 @@ function closeFullscreenViewVideo() {
     fullscreenVideo.pause();
 }
 
+// Add click event listener to the fullscreen view
 fullscreenViewVideo.addEventListener('click', function(event) {
-    if (event.target === this) {
-        createCloseButton();
+    // Check if the click event target is not the video element
+    if (event.target !== fullscreenViewVideo) {
+        // Close the fullscreen view
+        closeFullscreenViewVideo();
     }
 });
 
@@ -99,28 +102,6 @@ fullscreenViewVideo.addEventListener('click', function(event) {
     }
 });
 
-// Function to create and append close button
-function createCloseButton() {
-    // Create close button element
-    var closeButton = document.createElement('button');
-    closeButton.innerHTML = "X";
-    // Style the close button (you can customize this to match your design)
-    closeButton.style.position = 'absolute';
-    closeButton.style.top = '10px';
-    closeButton.style.right = '10px';
-    closeButton.style.padding = '5px 10px';
-    closeButton.style.backgroundColor = '#fff';
-    closeButton.style.border = '1px solid #000';
-    closeButton.style.borderRadius = '5px';
-    closeButton.style.cursor = 'pointer';
-    // Add event listener to close button
-    closeButton.addEventListener('click', function() {
-        closeFullscreenViewVideo();
-    });
-    // Append close button to fullscreen view
-    fullscreenViewVideo.appendChild(closeButton);
-}
-
 // Close fullscreen view when pressing the escape key
 document.addEventListener('keydown', function(event) {
     if (event.key === 'Escape') {
@@ -130,10 +111,6 @@ document.addEventListener('keydown', function(event) {
 
 // Update video size when the window is resized
 window.addEventListener('resize', updateVideoSize);
-
-
-
-
 
 // Get references to all video elements with class "video"
 var thumbnail = document.getElementsByClassName('mv');
