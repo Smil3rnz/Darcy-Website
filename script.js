@@ -86,12 +86,40 @@ function closeFullscreenViewVideo() {
     fullscreenVideo.pause();
 }
 
+fullscreenViewVideo.addEventListener('click', function(event) {
+    if (event.target === this) {
+        createCloseButton();
+    }
+});
+
 // Close fullscreen view when clicking outside the video
 fullscreenViewVideo.addEventListener('click', function(event) {
     if (event.target === this) {
         closeFullscreenViewVideo();
     }
 });
+
+// Function to create and append close button
+function createCloseButton() {
+    // Create close button element
+    var closeButton = document.createElement('button');
+    closeButton.innerHTML = "X";
+    // Style the close button (you can customize this to match your design)
+    closeButton.style.position = 'absolute';
+    closeButton.style.top = '10px';
+    closeButton.style.right = '10px';
+    closeButton.style.padding = '5px 10px';
+    closeButton.style.backgroundColor = '#fff';
+    closeButton.style.border = '1px solid #000';
+    closeButton.style.borderRadius = '5px';
+    closeButton.style.cursor = 'pointer';
+    // Add event listener to close button
+    closeButton.addEventListener('click', function() {
+        closeFullscreenViewVideo();
+    });
+    // Append close button to fullscreen view
+    fullscreenViewVideo.appendChild(closeButton);
+}
 
 // Close fullscreen view when pressing the escape key
 document.addEventListener('keydown', function(event) {
