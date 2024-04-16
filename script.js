@@ -102,3 +102,40 @@ document.addEventListener('keydown', function(event) {
 
 // Update video size when the window is resized
 window.addEventListener('resize', updateVideoSize);
+
+
+
+
+
+// Get references to all video elements with class "video"
+var thumbnail = document.getElementsByClassName('mv');
+
+// Iterate through each video element
+Array.from(thumbnail).forEach(function(thumbnail) {
+    // Wait for metadata to be loaded for each video
+    thumbnail.addEventListener('loadedmetadata', function() {
+        // Calculate the time point for the middle frame
+        var middleTime = thumbnail.duration / 2;
+
+        // Seek to the middle time point
+        thumbnail.currentTime = middleTime;
+
+        // Wait for the video to seek
+        thumbnail.addEventListener('seeked', function() {
+            // Get the canvas element
+            var canvas = document.createElement('canvas');
+            canvas.width = thumbnail.videoWidth;
+            canvas.height = thumbnail.videoHeight;
+
+            // Draw the current frame of the video onto the canvas
+            var ctx = canvas.getContext('2d');
+            ctx.drawImage(thumbnail, 0, 0, canvas.width, canvas.height);
+
+            // Convert canvas to data URL
+            var dataURL = canvas.toDataURL();
+
+            // Set the data URL as the poster attribute for the current video
+            thumbnail.setAttribute('poster', dataURL);
+        });
+    });
+});
